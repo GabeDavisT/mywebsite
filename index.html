@@ -5,16 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gabriel Thome - Software Engineer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <style>
         :root {
-            --primary-color: #2563eb;
-            --secondary-color: #1e40af;
-            --accent-color: #3b82f6;
-            --text-color: #1f2937;
-            --light-bg: #f3f4f6;
-            --white: #ffffff;
-            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            /* More sophisticated, less techy color palette */
+            --primary-color: #8B5CF6;    /* Soft Purple */
+            --secondary-color: #7C3AED;  /* Deeper Purple */
+            --accent-color: #F59E0B;     /* Warm Amber */
+            --text-color: #E2E8F0;       /* Soft White */
+            --dark-bg: #1A1B26;          /* Deep Navy/Black */
+            --card-bg: rgba(26, 27, 38, 0.7);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            --section-spacing: 4rem;
+            --content-spacing: 2rem;
         }
 
         * {
@@ -25,37 +29,54 @@
         }
 
         body {
+            background: var(--dark-bg);
+            color: var(--text-color);
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--light-bg);
         }
 
-        /* Enhanced Header Styles */
+        /* Modernized Header */
         header {
-            background: var(--gradient);
-            color: var(--white);
-            padding: 3rem 0;
-            text-align: center;
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-            margin-bottom: 2rem;
+            background: var(--dark-bg);
+            color: var(--text-color);
+            padding: 6rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--primary-color) 0%, transparent 50%);
+            opacity: 0.1;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         header h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: var(--text-color);
+            text-shadow: none;
         }
 
-        /* Enhanced Navigation */
+        /* Glass-morphism Navigation */
         nav {
-            background: rgba(30, 64, 175, 0.95);
-            padding: 1rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            background: var(--card-bg);
             backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-bottom: 1px solid var(--card-border);
+            padding: 1.2rem;
+            margin-bottom: 1rem;
         }
 
         nav ul {
@@ -66,116 +87,183 @@
         }
 
         nav a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            transition: all 0.3s ease;
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            opacity: 0.8;
         }
 
         nav a:hover {
-            background: rgba(255,255,255,0.1);
-            transform: translateY(-2px);
+            color: var(--accent-color);
+            opacity: 1;
         }
 
-        /* Enhanced Section Styles */
+        /* Modern Section Styling */
+        main {
+            padding-top: 2rem;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 3rem;
         }
 
         section {
-            background: var(--white);
-            border-radius: 15px;
-            margin: 2rem auto;
-            padding: 2rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            margin-top: 1rem;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-color);
+        }
+
+        /* Add space after main sections */
+        #education, #experience, #projects, #skills {
+            margin-bottom: 2rem;
+        }
+
+        /* Optional: Add a subtle separator effect */
+        .container > section {
+            position: relative;
+            box-shadow: 
+                0 4px 6px rgba(0, 0, 0, 0.1),
+                0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Ensure last section doesn't have extra margin */
+        section:last-child {
+            margin-bottom: 0;
         }
 
         /* Enhanced Cards */
         .project-card {
-            background: var(--white);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 1rem 0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            border: 1px solid rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: var(--content-spacing);
         }
 
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+        .project-card::before {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            box-shadow: 0 0 20px var(--accent-color);
+        }
+
+        .project-card:hover::before {
+            animation: pulse 1.5s infinite;
         }
 
         /* Enhanced Skills Section */
         .skills {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: center;
+            gap: 1.2rem;
+            justify-content: flex-start;
         }
 
         .skill-tag {
-            background: var(--gradient);
-            color: var(--white);
-            padding: 0.7rem 1.2rem;
+            background: transparent;
+            border: 1px solid var(--accent-color);
+            color: var(--text-color);
+            padding: 0.8rem 1.5rem;
             border-radius: 25px;
-            font-size: 0.9rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
         }
 
         .skill-tag:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            background: var(--accent-color);
+            color: var(--dark-bg);
         }
 
         /* Enhanced Experience Items */
         .experience-item {
-            border-left: 4px solid var(--primary-color);
-            padding-left: 1.5rem;
-            margin-bottom: 2rem;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 2rem;
+            margin-bottom: var(--content-spacing);
             position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateX(10px);
         }
 
         .experience-item::before {
             content: '';
             position: absolute;
-            left: -8px;
+            left: -12px;
             top: 0;
-            width: 12px;
-            height: 12px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            background: var(--primary-color);
+            background: var(--accent-color);
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
         }
 
-        /* Progress Bars */
-        .progress-bar {
-            height: 8px;
-            background: var(--light-bg);
-            border-radius: 4px;
-            margin: 1rem 0;
-            overflow: hidden;
+        .experience-item:hover::before {
+            animation: pulse 1.5s infinite;
         }
 
-        .progress {
-            height: 100%;
-            background: var(--gradient);
-            border-radius: 4px;
-            width: 0;
-            transition: width 1.5s ease;
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Enhanced list styling */
+        .experience-details ul {
+            margin-top: 1.5rem;
+            list-style: none;
+        }
+
+        .experience-details li {
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .experience-details li::before {
+            content: '→';
+            color: var(--accent-color);
+        }
+
+        /* Enhanced date and location styling */
+        .date, .location {
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .date {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .location {
+            color: var(--secondary-color);
+            font-style: italic;
         }
 
         /* Enhanced Footer */
         footer {
-            background: var(--text-color);
-            color: var(--white);
+            background: var(--dark-bg);
+            border-top: 1px solid var(--card-border);
             text-align: center;
             padding: 3rem 2rem;
-            margin-top: 4rem;
+            margin-top: 5rem;
             clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
         }
 
@@ -187,27 +275,37 @@
         }
 
         .social-links a {
-            color: var(--white);
+            background: var(--glass-bg);
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
             text-decoration: none;
             padding: 0.5rem 1rem;
             border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.2);
             transition: all 0.3s ease;
         }
 
         .social-links a:hover {
-            background: rgba(255,255,255,0.1);
-            transform: translateY(-2px);
+            background: var(--accent-color);
+            color: var(--dark-bg);
         }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Enhanced headings */
+        h2 {
+            color: var(--text-color);
+            font-size: 2.5rem;
+            margin-bottom: 2.5rem;
+            position: relative;
         }
 
-        .animate-fade-in {
-            animation: fadeIn 1s ease forwards;
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
         }
 
         /* Responsive Design */
@@ -226,13 +324,178 @@
                 justify-content: flex-start;
             }
         }
+
+        /* Add smooth scrolling behavior to the whole page */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Add these new animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .skill-tag {
+            animation: float 3s ease-in-out infinite;
+            animation-delay: calc(var(--i) * 0.1s);
+        }
+
+        /* Add custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
+        }
+
+        .featured {
+            border-left: none;
+            padding-left: 0;
+        }
+
+        .featured::before {
+            left: auto;
+            top: 1rem;
+            right: -2rem;
+            width: auto;
+            height: auto;
+            border-radius: 0;
+            background: var(--accent-color);
+            box-shadow: none;
+            animation: none;
+        }
+
+        .project-image {
+            width: 100%;
+            max-width: 300px;
+            height: 150px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .project-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            padding: 1rem;
+        }
+
+        .project-link {
+            margin: 1.5rem 0;
+        }
+
+        .project-link a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+
+        .project-link a:hover {
+            background: var(--accent-color);
+            color: var(--dark-bg);
+            transform: translateX(5px);
+        }
+
+        .project-tech {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--accent-color);
+            padding: 0.4rem 1rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .company-link {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            margin-left: 1rem;
+            padding: 0.3rem 0.8rem;
+            border: 1px solid var(--accent-color);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .company-link:hover {
+            background: var(--accent-color);
+            color: var(--dark-bg);
+            transform: translateX(5px);
+        }
+
+        @media (max-width: 768px) {
+            .company-link {
+                display: block;
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+        }
+
+        /* Update particles */
+        #particles-js {
+            opacity: 0.3;
+        }
+
+        /* Update the particles configuration in the script */
+        particlesScript.onload = () => {
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 50 },
+                    color: { value: '#F59E0B' },
+                    opacity: { value: 0.1 },
+                    size: { value: 2 },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: '#F59E0B',
+                        opacity: 0.05,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 1
+                    }
+                }
+            });
+        };
     </style>
 </head>
 <body>
     <header>
         <div class="container">
             <h1>Gabriel Thome</h1>
-            <p>Senior Software Engineer</p>
+            <p>Software Engineer</p>
             <p>Denton, Texas 78727 | (737)-210-6330 | g.davis.thome@gmail.com</p>
         </div>
     </header>
@@ -243,14 +506,13 @@
             <li><a href="#experience">Experience</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#skills">Skills</a></li>
-            <li><a href="#activities">Activities</a></li>
         </ul>
     </nav>
 
     <main>
         <section id="education" class="container">
             <h2>Education</h2>
-            <div class="education-item">
+            <div class="experience-item">
                 <h3>The University of North Texas - Denton, TX</h3>
                 <p>BS Computer Science - Expected May 2025</p>
                 <p>Completed 148 credit hours</p>
@@ -263,7 +525,11 @@
             <h2>Work Experience and Internships</h2>
             
             <div class="experience-item">
-                <h3>Full Stack Intern - Cruise Pirate</h3>
+                <h3>Full Stack Intern - Cruise Pirate 
+                    <a href="https://cruisepirate.ai" target="_blank" rel="noopener noreferrer" class="company-link">
+                        Visit cruisepirate.ai →
+                    </a>
+                </h3>
                 <p class="location">Denton, TX</p>
                 <p class="date">September 2024 - Current</p>
                 <div class="experience-details">
@@ -283,7 +549,7 @@
                 <p class="date">May 2021 - August 2022</p>
                 <div class="experience-details">
                     <ul>
-                        <li>Engineered custom software solution for streamlined patient information management</li>
+                        <li>Engineered custom software solution for streamlined patient information management, optimizing accessibility for authorized healthcare providers while maintaining HIPAA regulations</li>
                         <li>Architected and launched company website that enhanced digital presence and patient engagement</li>
                         <li>Spearheaded strategic digital marketing campaigns that increased patient acquisition by 10%</li>
                         <li>Managed over 1250 patient records, allowing for accurate billing and insurance claims processing</li>
@@ -294,29 +560,22 @@
 
         <section id="projects" class="container">
             <h2>Projects</h2>
-            <div class="project-card">
-                <h3>Precision Movement Tracker Software</h3>
-                <ul>
-                    <li>Developed comprehensive software for precision movement trackers, architecting both front-end interface and back-end 3D rendering</li>
-                    <li>Built client-side application with AWS EC2, RESTful API services, AWS RDS, and AWS S3</li>
-                    <li>Created system to gather sensor data and generate dynamic 3D visualizations using Unity</li>
-                    <li>Implemented functionality for user-defined inputs while securely storing bioinformatic information</li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="activities" class="container">
-            <h2>Activities</h2>
             <div class="experience-item">
-                <h3>Computer Science Club Member</h3>
-                <p class="location">Denton, TX</p>
-                <p class="date">January 2022 - January 2024</p>
+                <h3>Precision Movement Tracker Software</h3>
+                <p class="date">2023</p>
                 <div class="experience-details">
                     <ul>
-                        <li>Enhanced technical proficiency through weekly hands-on workshops</li>
-                        <li>Led team of 4 in collaborative coding projects</li>
-                        <li>Participated in coding competitions and hackathons</li>
+                        <li>Developed comprehensive software for precision movement trackers, architecting both front-end interface and back-end 3D rendering to enhance user interaction with sensor data</li>
+                        <li>Built client-side application for local execution with AWS EC2 for server hosting, RESTful API services, AWS RDS for data storage, and AWS S3 for resource management</li>
+                        <li>Created system to gather sensor data and generate dynamic 3D visualizations using Unity</li>
+                        <li>Implemented functionality for user-defined inputs while securely storing bioinformatic information</li>
                     </ul>
+                </div>
+                <div class="project-tech" style="margin-top: 1rem;">
+                    <span class="tech-tag">AWS</span>
+                    <span class="tech-tag">Unity</span>
+                    <span class="tech-tag">3D Rendering</span>
+                    <span class="tech-tag">RESTful API</span>
                 </div>
             </div>
         </section>
@@ -337,10 +596,7 @@
                 <span class="skill-tag">Git</span>
                 <span class="skill-tag">Excel</span>
                 <span class="skill-tag">AWS (EC2, RDS, S3)</span>
-                <span class="skill-tag">Ruby on Rails</span>
-                <span class="skill-tag">Azure</span>
-                <span class="skill-tag">Golang</span>
-                <span class="skill-tag">Agile</span>
+           
             </div>
         </section>
     </main>
@@ -356,24 +612,7 @@
     </footer>
 
     <!-- Adding JavaScript for dynamic features -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        // Initialize AOS (Animate On Scroll)
-        AOS.init({
-            duration: 1000,
-            once: true,
-            offset: 100
-        });
-
-        // Add data-aos attributes to elements
-        document.querySelectorAll('section').forEach(section => {
-            section.setAttribute('data-aos', 'fade-up');
-        });
-
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.setAttribute('data-aos', 'fade-up');
-        });
-
         // Smooth scrolling for navigation links
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -387,32 +626,7 @@
             });
         });
 
-        // Add progress bars to skills
-        const skills = document.querySelectorAll('.skill-tag');
-        skills.forEach(skill => {
-            skill.style.opacity = '0';
-            skill.style.transform = 'translateY(20px)';
-        });
-
-        // Animate skills on scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    let delay = 0;
-                    skills.forEach(skill => {
-                        setTimeout(() => {
-                            skill.style.opacity = '1';
-                            skill.style.transform = 'translateY(0)';
-                        }, delay);
-                        delay += 100;
-                    });
-                }
-            });
-        });
-
-        observer.observe(document.querySelector('.skills'));
-
-        // Add typing effect to header
+        // Simple typing effect for header
         const headerTitle = document.querySelector('header h1');
         const originalText = headerTitle.textContent;
         headerTitle.textContent = '';
@@ -427,6 +641,64 @@
         }
 
         typeWriter();
+
+        // Add intersection observer for fade-in effect
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Apply initial styles and observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'all 0.6s ease-out';
+            observer.observe(section);
+        });
+
+        // Add floating animation delay to skill tags
+        document.querySelectorAll('.skill-tag').forEach((tag, index) => {
+            tag.style.setProperty('--i', index);
+        });
+
+        // Add particle background
+        const particlesScript = document.createElement('script');
+        particlesScript.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
+        document.head.appendChild(particlesScript);
+
+        particlesScript.onload = () => {
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 80 },
+                    color: { value: '#22d3ee' },
+                    opacity: { value: 0.2 },
+                    size: { value: 3 },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: '#22d3ee',
+                        opacity: 0.1,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 2
+                    }
+                }
+            });
+        };
     </script>
+
+    <!-- Add this div right after the body tag -->
+    <div id="particles-js" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
 </body>
 </html> 
