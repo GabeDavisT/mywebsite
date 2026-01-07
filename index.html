@@ -416,7 +416,6 @@
         }
 
         .card:hover {
-            transform: translateY(-10px) rotateX(2deg);
             border-color: var(--accent);
             box-shadow:
                 0 25px 50px rgba(0, 0, 0, 0.3),
@@ -497,6 +496,29 @@
         .company-link:hover {
             transform: translateX(5px);
             box-shadow: 0 5px 20px var(--accent-glow);
+        }
+
+        /* Easter Egg Pirate */
+        .pirate-easter-egg {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            opacity: 0.3;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .pirate-easter-egg:hover {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .pirate-easter-egg svg {
+            width: 100%;
+            height: 100%;
         }
 
         /* Education Highlight */
@@ -812,20 +834,49 @@
             50% { opacity: 0; }
         }
 
-        /* Game Styles */
-        .game-container {
+        /* Game Modal */
+        .game-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10001;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .game-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .game-modal-content {
+            position: relative;
             max-width: 650px;
-            margin: 0 auto;
+            width: 95%;
         }
 
-        .game-info {
-            text-align: center;
-            margin-bottom: 2rem;
+        .game-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: none;
+            border: none;
             color: var(--text-muted);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
-        .game-info strong {
-            color: var(--accent);
+        .game-close:hover {
+            color: var(--neon-pink);
+            transform: rotate(90deg);
         }
 
         .game-wrapper {
@@ -840,7 +891,6 @@
             display: block;
             width: 100%;
             height: auto;
-            cursor: none;
         }
 
         .game-overlay {
@@ -849,12 +899,13 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(10, 22, 40, 0.95);
+            background: rgba(10, 22, 40, 0.98);
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             transition: opacity 0.3s;
+            padding: 2rem;
         }
 
         .game-overlay.hidden {
@@ -862,8 +913,12 @@
             pointer-events: none;
         }
 
+        .game-overlay-content {
+            width: 100%;
+        }
+
         .game-overlay-content h3 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
             background: linear-gradient(135deg, #fbbf24, #f59e0b);
             -webkit-background-clip: text;
@@ -873,20 +928,49 @@
 
         .game-overlay-content p {
             color: var(--text-muted);
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .game-stats-display {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .game-stat-item {
+            text-align: center;
+        }
+
+        .game-stat-item .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fbbf24;
+            font-family: 'JetBrains Mono', monospace;
+            display: block;
+        }
+
+        .game-stat-item .label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .game-btn {
             background: linear-gradient(135deg, #fbbf24, #f59e0b);
             border: none;
-            padding: 1rem 2.5rem;
+            padding: 1rem 3rem;
             border-radius: 30px;
             color: #0a1628;
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            margin-top: 1rem;
         }
 
         .game-btn:hover {
@@ -894,40 +978,39 @@
             box-shadow: 0 10px 30px rgba(251, 191, 36, 0.3);
         }
 
-        .game-stats {
+        .game-hud {
             display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-top: 1.5rem;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            background: rgba(10, 22, 40, 0.9);
+            border-top: 1px solid var(--border);
         }
 
-        .game-stats .stat {
+        .hud-item {
             text-align: center;
         }
 
-        .game-stats .stat-label {
-            display: block;
-            font-size: 0.8rem;
+        .hud-item .hud-label {
+            font-size: 0.7rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 0.3rem;
         }
 
-        .game-stats .stat-value {
-            font-size: 1.5rem;
+        .hud-item .hud-value {
+            font-size: 1.3rem;
             font-weight: 700;
             color: #fbbf24;
             font-family: 'JetBrains Mono', monospace;
         }
 
-        @media (max-width: 768px) {
-            .game-stats {
-                gap: 1.5rem;
-            }
-            .game-overlay-content h3 {
-                font-size: 1.5rem;
-            }
+        @keyframes countUp {
+            from { transform: scale(1.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-count {
+            animation: countUp 0.5s ease-out;
         }
     </style>
 </head>
@@ -948,6 +1031,60 @@
         <div class="orb orb-3"></div>
     </div>
 
+    <!-- Game Modal (Hidden Easter Egg) -->
+    <div class="game-modal" id="gameModal">
+        <div class="game-modal-content">
+            <button class="game-close" id="gameClose">&times;</button>
+            <div class="game-wrapper">
+                <canvas id="gameCanvas" width="600" height="400"></canvas>
+                <div class="game-overlay" id="gameOverlay">
+                    <div class="game-overlay-content">
+                        <h3 id="overlayTitle">Pirate Plunder</h3>
+                        <p id="overlayText">Collect gold, avoid cannonballs!</p>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Use Arrow Keys or A/D to move</p>
+                        <div class="game-stats-display" id="endStats" style="display: none;">
+                            <div class="game-stat-item">
+                                <span class="value" id="finalScore">0</span>
+                                <span class="label">Gold</span>
+                            </div>
+                            <div class="game-stat-item">
+                                <span class="value" id="finalTime">0s</span>
+                                <span class="label">Survived</span>
+                            </div>
+                            <div class="game-stat-item">
+                                <span class="value" id="finalLevel">1</span>
+                                <span class="label">Level</span>
+                            </div>
+                        </div>
+                        <button id="startBtn" class="game-btn">Set Sail!</button>
+                    </div>
+                </div>
+            </div>
+            <div class="game-hud">
+                <div class="hud-item">
+                    <div class="hud-label">Score</div>
+                    <div class="hud-value" id="scoreDisplay">0</div>
+                </div>
+                <div class="hud-item">
+                    <div class="hud-label">Level</div>
+                    <div class="hud-value" id="levelDisplay">1</div>
+                </div>
+                <div class="hud-item">
+                    <div class="hud-label">Time</div>
+                    <div class="hud-value" id="timeDisplay">0s</div>
+                </div>
+                <div class="hud-item">
+                    <div class="hud-label">Lives</div>
+                    <div class="hud-value" id="livesDisplay">3</div>
+                </div>
+                <div class="hud-item">
+                    <div class="hud-label">Best</div>
+                    <div class="hud-value" id="highScoreDisplay">0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav>
         <ul>
@@ -955,7 +1092,6 @@
             <li><a href="#experience">Experience</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#skills">Skills</a></li>
-            <li><a href="#game">Play Game</a></li>
         </ul>
     </nav>
 
@@ -1017,7 +1153,7 @@
                 <h2 data-number="02">Experience</h2>
             </div>
 
-            <div class="card">
+            <div class="card" id="cruisePirateCard" style="position: relative;">
                 <h3>
                     Full Stack Intern
                     <a href="https://cruisepirate.ai" target="_blank" rel="noopener noreferrer" class="company-link">
@@ -1041,6 +1177,22 @@
                     <span class="tech-tag">TypeScript</span>
                     <span class="tech-tag">RAG</span>
                     <span class="tech-tag">AI/ML</span>
+                </div>
+                <!-- Easter Egg Pirate -->
+                <div class="pirate-easter-egg" id="pirateEasterEgg" title="Arrr!">
+                    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="32" cy="32" r="28" fill="#2a2a2a"/>
+                        <ellipse cx="32" cy="38" rx="16" ry="12" fill="#DEB887"/>
+                        <circle cx="32" cy="26" r="14" fill="#DEB887"/>
+                        <rect x="18" y="12" width="28" height="8" rx="2" fill="#1a1a1a"/>
+                        <rect x="22" y="8" width="20" height="6" rx="2" fill="#1a1a1a"/>
+                        <circle cx="32" cy="11" r="3" fill="#fbbf24"/>
+                        <rect x="24" y="24" width="6" height="3" rx="1" fill="#1a1a1a"/>
+                        <circle cx="27" cy="25" r="2" fill="white"/>
+                        <circle cx="27" cy="25" r="1" fill="#1a1a1a"/>
+                        <ellipse cx="40" cy="26" rx="5" ry="4" fill="#1a1a1a"/>
+                        <path d="M28 34 Q32 38 36 34" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+                    </svg>
                 </div>
             </div>
 
@@ -1143,42 +1295,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Game Section -->
-        <section id="game">
-            <div class="section-header">
-                <h2 data-number="05">Pirate Plunder</h2>
-            </div>
-            <div class="game-container">
-                <div class="game-info">
-                    <p>Sail the seas and collect treasure! Use <strong>Arrow Keys</strong> or <strong>A/D</strong> to move your ship. Catch gold coins, avoid cannonballs!</p>
-                </div>
-                <div class="game-wrapper">
-                    <canvas id="gameCanvas" width="600" height="400"></canvas>
-                    <div class="game-overlay" id="gameOverlay">
-                        <div class="game-overlay-content">
-                            <h3 id="overlayTitle">Pirate Plunder</h3>
-                            <p id="overlayText">Collect gold, avoid cannonballs!</p>
-                            <button id="startBtn" class="game-btn">Set Sail!</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="game-stats">
-                    <div class="stat">
-                        <span class="stat-label">Score</span>
-                        <span class="stat-value" id="scoreDisplay">0</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-label">High Score</span>
-                        <span class="stat-value" id="highScoreDisplay">0</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-label">Lives</span>
-                        <span class="stat-value" id="livesDisplay">3</span>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
     <!-- Footer -->
@@ -1214,7 +1330,7 @@
         });
 
         // Cursor hover effect
-        const interactiveElements = document.querySelectorAll('a, button, .pill, .card, .skill-tag');
+        const interactiveElements = document.querySelectorAll('a, button, .pill, .card, .skill-tag, .pirate-easter-egg');
         interactiveElements.forEach(el => {
             el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
             el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
@@ -1294,23 +1410,62 @@
             });
         });
 
-        // ========== PIRATE PLUNDER GAME ==========
+        // ========== EASTER EGG GAME ==========
+        const gameModal = document.getElementById('gameModal');
+        const gameClose = document.getElementById('gameClose');
+        const pirateEasterEgg = document.getElementById('pirateEasterEgg');
         const gameCanvas = document.getElementById('gameCanvas');
         const ctx = gameCanvas.getContext('2d');
         const overlay = document.getElementById('gameOverlay');
         const startBtn = document.getElementById('startBtn');
         const overlayTitle = document.getElementById('overlayTitle');
         const overlayText = document.getElementById('overlayText');
+        const endStats = document.getElementById('endStats');
         const scoreDisplay = document.getElementById('scoreDisplay');
-        const highScoreDisplay = document.getElementById('highScoreDisplay');
+        const levelDisplay = document.getElementById('levelDisplay');
+        const timeDisplay = document.getElementById('timeDisplay');
         const livesDisplay = document.getElementById('livesDisplay');
+        const highScoreDisplay = document.getElementById('highScoreDisplay');
+        const finalScore = document.getElementById('finalScore');
+        const finalTime = document.getElementById('finalTime');
+        const finalLevel = document.getElementById('finalLevel');
+
+        // Open game modal
+        pirateEasterEgg.addEventListener('click', (e) => {
+            e.stopPropagation();
+            gameModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Close game modal
+        gameClose.addEventListener('click', () => {
+            gameModal.classList.remove('active');
+            document.body.style.overflow = '';
+            if (gameRunning) {
+                gameRunning = false;
+                cancelAnimationFrame(animationId);
+            }
+        });
+
+        gameModal.addEventListener('click', (e) => {
+            if (e.target === gameModal) {
+                gameModal.classList.remove('active');
+                document.body.style.overflow = '';
+                if (gameRunning) {
+                    gameRunning = false;
+                    cancelAnimationFrame(animationId);
+                }
+            }
+        });
 
         // Game state
         let gameRunning = false;
         let score = 0;
         let highScore = localStorage.getItem('pirateHighScore') || 0;
         let lives = 3;
-        let difficulty = 1;
+        let level = 1;
+        let gameTime = 0;
+        let lastTime = 0;
         let animationId;
 
         highScoreDisplay.textContent = highScore;
@@ -1321,7 +1476,7 @@
             y: 340,
             width: 60,
             height: 50,
-            speed: 6,
+            speed: 5,
             moving: { left: false, right: false }
         };
 
@@ -1336,8 +1491,19 @@
             waves.push({ x: i * 250, y: 360 + i * 10, speed: 0.5 + i * 0.2 });
         }
 
+        // Level settings
+        function getLevelSettings() {
+            return {
+                coinSpeed: 1 + level * 0.3,
+                cannonSpeed: 1.5 + level * 0.4,
+                coinSpawnRate: 0.015 + level * 0.002,
+                cannonSpawnRate: 0.005 + level * 0.002
+            };
+        }
+
         // Input handling
         document.addEventListener('keydown', (e) => {
+            if (!gameModal.classList.contains('active')) return;
             if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') ship.moving.left = true;
             if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') ship.moving.right = true;
         });
@@ -1347,12 +1513,7 @@
             if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') ship.moving.right = false;
         });
 
-        // Touch controls for mobile
-        let touchStartX = 0;
-        gameCanvas.addEventListener('touchstart', (e) => {
-            touchStartX = e.touches[0].clientX;
-        });
-
+        // Touch controls
         gameCanvas.addEventListener('touchmove', (e) => {
             e.preventDefault();
             const touchX = e.touches[0].clientX;
@@ -1367,12 +1528,15 @@
         function startGame() {
             score = 0;
             lives = 3;
-            difficulty = 1;
+            level = 1;
+            gameTime = 0;
+            lastTime = performance.now();
             ship.x = 270;
             coins = [];
             cannonballs = [];
             particles = [];
             updateDisplay();
+            endStats.style.display = 'none';
             overlay.classList.add('hidden');
             gameRunning = true;
             gameLoop();
@@ -1381,6 +1545,7 @@
         function endGame() {
             gameRunning = false;
             cancelAnimationFrame(animationId);
+
             if (score > highScore) {
                 highScore = score;
                 localStorage.setItem('pirateHighScore', highScore);
@@ -1389,35 +1554,51 @@
             } else {
                 overlayTitle.textContent = 'Game Over!';
             }
-            overlayText.textContent = `You collected ${score} gold!`;
+
+            overlayText.textContent = 'You found the secret game!';
+            finalScore.textContent = score;
+            finalTime.textContent = Math.floor(gameTime) + 's';
+            finalLevel.textContent = level;
+            endStats.style.display = 'flex';
             startBtn.textContent = 'Play Again';
             overlay.classList.remove('hidden');
+
+            // Animate stats
+            setTimeout(() => {
+                finalScore.classList.add('animate-count');
+                setTimeout(() => finalTime.classList.add('animate-count'), 200);
+                setTimeout(() => finalLevel.classList.add('animate-count'), 400);
+            }, 100);
         }
 
         function updateDisplay() {
             scoreDisplay.textContent = score;
+            levelDisplay.textContent = level;
+            timeDisplay.textContent = Math.floor(gameTime) + 's';
             livesDisplay.textContent = lives;
         }
 
         function spawnCoin() {
-            if (Math.random() < 0.02 + difficulty * 0.005) {
+            const settings = getLevelSettings();
+            if (Math.random() < settings.coinSpawnRate) {
                 coins.push({
                     x: Math.random() * (gameCanvas.width - 30),
                     y: -30,
                     size: 20,
-                    speed: 2 + Math.random() * 2 + difficulty * 0.3,
+                    speed: settings.coinSpeed + Math.random() * 0.5,
                     rotation: 0
                 });
             }
         }
 
         function spawnCannonball() {
-            if (Math.random() < 0.008 + difficulty * 0.003) {
+            const settings = getLevelSettings();
+            if (Math.random() < settings.cannonSpawnRate) {
                 cannonballs.push({
                     x: Math.random() * (gameCanvas.width - 20),
                     y: -20,
                     size: 15,
-                    speed: 3 + Math.random() * 2 + difficulty * 0.4
+                    speed: settings.cannonSpeed + Math.random() * 0.5
                 });
             }
         }
@@ -1427,9 +1608,9 @@
                 particles.push({
                     x: x,
                     y: y,
-                    vx: (Math.random() - 0.5) * 8,
-                    vy: (Math.random() - 0.5) * 8 - 2,
-                    size: Math.random() * 6 + 2,
+                    vx: (Math.random() - 0.5) * 6,
+                    vy: (Math.random() - 0.5) * 6 - 2,
+                    size: Math.random() * 5 + 2,
                     color: color,
                     life: 1
                 });
@@ -1492,19 +1673,16 @@
             ctx.translate(coin.x + coin.size / 2, coin.y + coin.size / 2);
             ctx.rotate(coin.rotation);
 
-            // Outer ring
             ctx.fillStyle = '#FFD700';
             ctx.beginPath();
             ctx.arc(0, 0, coin.size / 2, 0, Math.PI * 2);
             ctx.fill();
 
-            // Inner detail
             ctx.fillStyle = '#FFA500';
             ctx.beginPath();
             ctx.arc(0, 0, coin.size / 3, 0, Math.PI * 2);
             ctx.fill();
 
-            // Dollar sign
             ctx.fillStyle = '#FFD700';
             ctx.font = 'bold 12px Arial';
             ctx.textAlign = 'center';
@@ -1515,19 +1693,16 @@
         }
 
         function drawCannonball(ball) {
-            // Cannonball
             ctx.fillStyle = '#2a2a2a';
             ctx.beginPath();
             ctx.arc(ball.x + ball.size / 2, ball.y + ball.size / 2, ball.size / 2, 0, Math.PI * 2);
             ctx.fill();
 
-            // Shine
             ctx.fillStyle = '#4a4a4a';
             ctx.beginPath();
             ctx.arc(ball.x + ball.size / 3, ball.y + ball.size / 3, ball.size / 5, 0, Math.PI * 2);
             ctx.fill();
 
-            // Fuse spark
             ctx.fillStyle = '#FF6B35';
             ctx.beginPath();
             ctx.arc(ball.x + ball.size / 2, ball.y, 3, 0, Math.PI * 2);
@@ -1549,7 +1724,6 @@
         }
 
         function drawBackground() {
-            // Sky gradient
             const gradient = ctx.createLinearGradient(0, 0, 0, gameCanvas.height);
             gradient.addColorStop(0, '#0a1628');
             gradient.addColorStop(0.6, '#1a3a5c');
@@ -1557,7 +1731,6 @@
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
 
-            // Stars
             ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
             for (let i = 0; i < 30; i++) {
                 const x = (i * 73) % gameCanvas.width;
@@ -1567,7 +1740,6 @@
                 ctx.fill();
             }
 
-            // Moon
             ctx.fillStyle = '#F5F5DC';
             ctx.beginPath();
             ctx.arc(500, 60, 25, 0, Math.PI * 2);
@@ -1576,15 +1748,33 @@
             ctx.beginPath();
             ctx.arc(510, 55, 20, 0, Math.PI * 2);
             ctx.fill();
+
+            // Level indicator
+            ctx.fillStyle = 'rgba(251, 191, 36, 0.8)';
+            ctx.font = 'bold 14px Space Grotesk';
+            ctx.textAlign = 'left';
+            ctx.fillText('Level ' + level, 15, 25);
         }
 
-        function gameLoop() {
+        function gameLoop(currentTime) {
             if (!gameRunning) return;
 
-            // Clear and draw background
+            // Update time
+            const deltaTime = (currentTime - lastTime) / 1000;
+            lastTime = currentTime;
+            gameTime += deltaTime;
+
+            // Level up every 30 seconds
+            const newLevel = Math.floor(gameTime / 30) + 1;
+            if (newLevel > level) {
+                level = newLevel;
+                createParticles(gameCanvas.width / 2, gameCanvas.height / 2, '#fbbf24', 20);
+            }
+
+            updateDisplay();
+
             drawBackground();
 
-            // Update waves
             waves.forEach(wave => {
                 wave.x += wave.speed;
                 if (wave.x > 100) wave.x = 0;
@@ -1596,44 +1786,40 @@
             if (ship.moving.right) ship.x += ship.speed;
             ship.x = Math.max(0, Math.min(gameCanvas.width - ship.width, ship.x));
 
-            // Spawn objects
             spawnCoin();
             spawnCannonball();
 
-            // Update and draw coins
+            // Update coins
             coins = coins.filter(coin => {
                 coin.y += coin.speed;
-                coin.rotation += 0.1;
+                coin.rotation += 0.08;
                 drawCoin(coin);
 
-                // Collision with ship
+                // Collision - collect coin (no damage!)
                 if (coin.y + coin.size > ship.y &&
                     coin.y < ship.y + ship.height &&
                     coin.x + coin.size > ship.x &&
                     coin.x < ship.x + ship.width) {
                     score += 10;
-                    difficulty = 1 + Math.floor(score / 100) * 0.2;
-                    createParticles(coin.x + coin.size / 2, coin.y + coin.size / 2, '#FFD700', 10);
-                    updateDisplay();
+                    createParticles(coin.x + coin.size / 2, coin.y + coin.size / 2, '#FFD700', 8);
                     return false;
                 }
 
                 return coin.y < gameCanvas.height + 30;
             });
 
-            // Update and draw cannonballs
+            // Update cannonballs
             cannonballs = cannonballs.filter(ball => {
                 ball.y += ball.speed;
                 drawCannonball(ball);
 
-                // Collision with ship
+                // Collision - take damage
                 if (ball.y + ball.size > ship.y + 10 &&
                     ball.y < ship.y + ship.height &&
                     ball.x + ball.size > ship.x + 10 &&
                     ball.x < ship.x + ship.width - 10) {
                     lives--;
-                    createParticles(ball.x + ball.size / 2, ball.y + ball.size / 2, '#FF6B35', 15);
-                    updateDisplay();
+                    createParticles(ball.x + ball.size / 2, ball.y + ball.size / 2, '#FF6B35', 12);
                     if (lives <= 0) {
                         endGame();
                     }
@@ -1643,12 +1829,12 @@
                 return ball.y < gameCanvas.height + 20;
             });
 
-            // Update and draw particles
+            // Update particles
             particles = particles.filter(p => {
                 p.x += p.vx;
                 p.y += p.vy;
-                p.vy += 0.2;
-                p.life -= 0.03;
+                p.vy += 0.15;
+                p.life -= 0.025;
 
                 ctx.globalAlpha = p.life;
                 ctx.fillStyle = p.color;
@@ -1660,7 +1846,6 @@
                 return p.life > 0;
             });
 
-            // Draw ship
             drawShip();
 
             animationId = requestAnimationFrame(gameLoop);
